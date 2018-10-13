@@ -1,13 +1,9 @@
 .carousel__image {
   width: 500px;
   margin: 0 auto;
+  display: none;
 }
 
 .carousel__image img {
   max-width: 100%;
-}
-
-#image2,
-#image3 {
-  display: none;
 }
