@@ -1,1 +1,1 @@
-# Daily JS Prodjects
+# Daily JS Projects
