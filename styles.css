@@ -6,3 +6,8 @@
 .carousel__image img {
   max-width: 100%;
 }
+
+#image2,
+#image3 {
+  display: none;
+}
