@@ -19,6 +19,8 @@ function checkForMatch() {
 function resetCount() {
   if (count === 4) {
     count = 1;
+  } else if (count === 0) {
+    count = 3;
   }
 }
 
@@ -26,6 +28,15 @@ function resetCount() {
 function next() {
   count += 1;
   console.log('Next button was clicked');
+  console.log(count);
+  resetCount();
+  checkForMatch();
+}
+
+// click previous button to go back
+function previous() {
+  count -= 1;
+  console.log('Prevous button was clicked');
   console.log(count);
   resetCount();
   checkForMatch();
