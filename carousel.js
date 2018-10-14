@@ -4,6 +4,20 @@ let count = 1;
 // loop through this looking for a match and showing the match, hide rest
 const imageIDs = ['image1', 'image2', 'image3'];
 
+const circleIDs = ['circle1', 'circle2', 'circle3'];
+
+// highlight circle that represents the current image
+function highlightCircle() {
+  for (let i = 0; i < circleIDs.length; i += 1) {
+    const circle = document.getElementById(circleIDs[i]);
+    if (circleIDs[i] === (`circle${count}`)) {
+      circle.classList.add('highlighted-circle');
+    } else {
+      circle.classList.remove('highlighted-circle');
+    }
+  }
+}
+
 function checkForMatch() {
   for (let i = 0; i < imageIDs.length; i += 1) {
     const image = document.getElementById(imageIDs[i]);
@@ -13,6 +27,7 @@ function checkForMatch() {
       image.style.display = 'none';
     }
   }
+  highlightCircle();
 }
 
 // reset count to 1 if count reaches 4
