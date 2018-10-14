@@ -30,6 +30,21 @@ function checkForMatch() {
   highlightCircle();
 }
 
+// clicking circle will show image it represents
+function showClicked(value) {
+  const clickedID = Number(value.match(/\d/g));
+  for (let i = 0; i < imageIDs.length; i += 1) {
+    const image = document.getElementById(imageIDs[i]);
+    if (imageIDs[i] === (`image${clickedID}`)) {
+      image.style.display = 'block';
+    } else {
+      image.style.display = 'none';
+    }
+  }
+  count = clickedID;
+  highlightCircle();
+}
+
 // reset count to 1 if count reaches 4
 function resetCount() {
   if (count === 4) {
