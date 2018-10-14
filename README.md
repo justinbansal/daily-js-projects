@@ -4,4 +4,4 @@
 
 ### Carousel Slider 
 
-How would I go about building a carousel slider from scratch? 
+How would I go about building a carousel from scratch? 
