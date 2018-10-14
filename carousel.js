@@ -15,11 +15,19 @@ function checkForMatch() {
   }
 }
 
+// reset count to 1 if count reaches 4
+function resetCount() {
+  if (count === 4) {
+    count = 1;
+  }
+}
+
 // click next button to change picture
 function next() {
   count += 1;
   console.log('Next button was clicked');
   console.log(count);
+  resetCount();
   checkForMatch();
 }
 
