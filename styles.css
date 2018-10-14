@@ -8,3 +8,12 @@
 .carousel__image img {
   max-width: 100%;
 }
+
+.carousel__circle {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  display: inline-block;
+}
