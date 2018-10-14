@@ -17,3 +17,8 @@
   border: 1px solid #000000;
   display: inline-block;
 }
+
+.highlighted-circle {
+  background: #000000;
+  border: 1px solid #FFFFFF;
+}
