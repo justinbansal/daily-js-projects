@@ -57,8 +57,6 @@ function resetCount() {
 // click next button to change picture
 function next() {
   count += 1;
-  console.log('Next button was clicked');
-  console.log(count);
   resetCount();
   checkForMatch();
 }
@@ -66,8 +64,6 @@ function next() {
 // click previous button to go back
 function previous() {
   count -= 1;
-  console.log('Prevous button was clicked');
-  console.log(count);
   resetCount();
   checkForMatch();
 }
