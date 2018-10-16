@@ -1,7 +1,8 @@
 # Daily JS Projects
 
-## Day 1
+## Project 1
 
-### Carousel Slider 
+### Image Carousel
 
-How would I go about building a carousel from scratch? 
+* Previous/Next Button
+* Indicators of number of slides, ability to select specific slide 
