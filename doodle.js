@@ -29,13 +29,19 @@ function displayPolls() {
     const dateHeading = document.createElement('h1');
     pollRow.appendChild(dateHeading);
     dateHeading.innerHTML = polls[i].date;
+    const checkboxLabel = document.createElement('label');
+    checkboxLabel.innerHTML = 'Vote Yes';
     const voteCheck = document.createElement('INPUT');
     voteCheck.type = 'checkbox';
     voteCheck.name = 'voting';
     pollRow.appendChild(voteCheck);
+    pollRow.insertBefore(checkboxLabel, voteCheck);
+    const submitLabel = document.createElement('label');
+    submitLabel.innerHTML = 'Enter Name';
     const submitName = document.createElement('INPUT');
     submitName.type = 'text';
     pollRow.appendChild(submitName);
+    pollRow.insertBefore(submitLabel, submitName);
   }
 }
 
