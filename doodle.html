@@ -9,12 +9,14 @@
 <body>
 
     <div class="poll">
-        <form action="#">
+        <form action="#" id="doodleForm">
             Title <input type="text" name="title"> <br>
             Location <input type="text" name="location"> <br>
             Comments <textarea name="comments"></textarea> <br>
-            Event:<input type="date" name="event"> <br>
-            <button>Add Date</button>
+            <div id="dateRow">
+                Event:<input type="date" name="event"> <br>
+            </div>
+            <button id="addDate">Add Date</button>
             <input type="submit">
         </form>
     </div>
