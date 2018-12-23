@@ -15,11 +15,15 @@ function addDate(e) {
   document.getElementById('dateRow').appendChild(input);
 }
 
-function saveForm() {
-  localStorage.setItem('title', titleInput.value);
-  localStorage.setItem('location', locationInput.value);
-  localStorage.setItem('comments', commentsInput.value);
-  localStorage.setItem('event', eventInput.value);
+function saveForm(e) {
+  e.preventDefault();
+  const poll = {};
+  poll.title = titleInput.value;
+  poll.location = locationInput.value;
+  poll.comments = commentsInput.value;
+  poll.date = eventInput.value;
+  console.log(poll);
+  localStorage.setItem('poll', JSON.stringify(poll));
 }
 
 addBtn.addEventListener('click', addDate);
