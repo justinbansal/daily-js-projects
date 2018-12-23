@@ -47,8 +47,8 @@ function saveForm(e) {
   poll.comments = commentsInput.value;
   poll.date = eventInput.value;
   polls.push(poll);
-  displayPolls();
   localStorage.setItem('polls', JSON.stringify(polls));
+  displayPolls();
 }
 
 addBtn.addEventListener('click', addDate);
