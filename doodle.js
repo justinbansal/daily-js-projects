@@ -37,12 +37,6 @@ function displayPolls() {
     voteCheck.name = 'voting';
     pollRow.appendChild(voteCheck);
     pollRow.insertBefore(checkboxLabel, voteCheck);
-    const submitLabel = document.createElement('label');
-    submitLabel.innerHTML = 'Enter Name';
-    const submitName = document.createElement('INPUT');
-    submitName.type = 'text';
-    pollRow.appendChild(submitName);
-    pollRow.insertBefore(submitLabel, submitName);
   }
 }
 
