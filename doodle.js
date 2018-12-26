@@ -50,14 +50,22 @@ function saveForm() {
   poll.comments = commentsInput.value;
   poll.date = eventInput.value;
   poll.id = pollID;
+  poll.voters = [];
   polls.push(poll);
   localStorage.setItem('polls', JSON.stringify(polls));
   displayPolls();
 }
 
 // update each poll with name of voter
-function submitVote(e) {
-  console.log(voteInput.value);
+function submitVote() {
+  for (let i = 0; i < polls.length; i += 1) {
+    const voter = {
+      name: `${voteInput.value}`,
+      vote: '',
+    };
+    polls[i].voters.push(voter);
+  }
+  localStorage.setItem('polls', JSON.stringify(polls));
 }
 
 addBtn.addEventListener('click', addDate);
