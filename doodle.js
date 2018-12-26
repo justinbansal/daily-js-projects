@@ -31,6 +31,7 @@ function displayPolls() {
   for (let i = 0; i < polls.length; i += 1) {
     const pollContainer = document.createElement('div');
     pollContainer.className = 'pollContainer';
+    pollContainer.id = polls[i].id;
     pollRow.appendChild(pollContainer);
     const dateHeading = document.createElement('h3');
     pollContainer.appendChild(dateHeading);
@@ -45,7 +46,8 @@ function displayPolls() {
   }
 }
 
-function saveForm() {
+function saveForm(e) {
+  e.preventDefault();
   pollID += 1;
   const poll = {};
   poll.title = titleInput.value;
