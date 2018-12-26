@@ -46,8 +46,7 @@ function displayPolls() {
   }
 }
 
-function saveForm(e) {
-  e.preventDefault();
+function saveForm() {
   pollID += 1;
   const poll = {};
   poll.title = titleInput.value;
