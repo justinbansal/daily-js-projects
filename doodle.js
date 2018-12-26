@@ -37,6 +37,11 @@ function displayPolls() {
     const dateHeading = document.createElement('h3');
     pollContainer.appendChild(dateHeading);
     dateHeading.innerHTML = polls[i].date;
+    const filteredVotes = polls[i].voters.filter(voter => voter.vote === true);
+    polls[i].votes = filteredVotes.length;
+    const votesText = document.createElement('p');
+    pollContainer.appendChild(votesText);
+    votesText.innerHTML = polls[i].votes;
     const checkboxLabel = document.createElement('label');
     checkboxLabel.innerHTML = 'Vote Yes';
     const voteCheck = document.createElement('INPUT');
@@ -58,6 +63,7 @@ function saveForm(e) {
   poll.date = eventInput.value;
   poll.id = pollID;
   poll.voters = [];
+  poll.votes = '';
   polls.push(poll);
   localStorage.setItem('polls', JSON.stringify(polls));
   displayPolls();
@@ -73,6 +79,7 @@ function submitVote() {
     polls[i].voters.push(voter);
   }
   localStorage.setItem('polls', JSON.stringify(polls));
+  window.location.reload();
 }
 
 addBtn.addEventListener('click', addDate);
