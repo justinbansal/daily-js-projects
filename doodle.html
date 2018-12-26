@@ -25,23 +25,28 @@
                             <input type="text" name="location" id="location">
                         </div>
                         <div class="form-group">
-                                <label for="date">Event</label>
-                                <input type="date" name="event" id="event">
-                            </div>
+                            <label for="date">Event</label>
+                            <input type="date" name="event" id="event">
+                        </div>
                         <input class="btn btn-primary" type="submit" id="submit">
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
+            <div class="col-md-12 displayPolls">
+                <div class="displayPolls">
+                    <h2>Event Dates</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="voter">Now Voting:</label>
+                            <input type="text" name="voter" id="voteInput">
+                        </div>
+                    </form>
+                    <div class="row" id="poll-row">
 
-    <div class="displayPolls">
-        <br>
-        <h2>Event Dates</h2>
-        Now Voting: 
-        <input id="voteInput" type="text" name="voter">
-        <button id="submitVote">Submit Votes</button>
-        <div id="poll-row">
+                    </div>
+                    <button class="btn btn-success" id="submitVote">Submit Votes</button>
+                </div>
+            </div>
         </div>
     </div>
     

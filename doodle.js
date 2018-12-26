@@ -23,7 +23,7 @@ function displayPolls() {
   }
   for (let i = 0; i < polls.length; i += 1) {
     const pollContainer = document.createElement('div');
-    pollContainer.className = 'pollContainer';
+    pollContainer.classList = 'pollContainer col-md-3';
     pollContainer.id = polls[i].id;
     pollRow.appendChild(pollContainer);
     const dateHeading = document.createElement('h3');
@@ -35,9 +35,11 @@ function displayPolls() {
     pollContainer.appendChild(votesText);
     votesText.innerHTML = polls[i].votes;
     const checkboxLabel = document.createElement('label');
+    checkboxLabel.className = 'form-check-label';
     checkboxLabel.innerHTML = 'Vote Yes';
     const voteCheck = document.createElement('INPUT');
     voteCheck.type = 'checkbox';
+    voteCheck.className = 'form-check-input';
     voteCheck.name = 'voting';
     voteCheck.id = `checkbox${polls[i].id}`;
     pollContainer.appendChild(voteCheck);
