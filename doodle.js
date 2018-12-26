@@ -41,6 +41,7 @@ function displayPolls() {
     const voteCheck = document.createElement('INPUT');
     voteCheck.type = 'checkbox';
     voteCheck.name = 'voting';
+    voteCheck.id = `checkbox${polls[i].id}`;
     pollContainer.appendChild(voteCheck);
     pollContainer.insertBefore(checkboxLabel, voteCheck);
   }
@@ -67,6 +68,7 @@ function saveForm(e) {
 
 function checkBox() {
   console.log('checkbox triggered');
+
 }
 
 // update each poll with name of voter
