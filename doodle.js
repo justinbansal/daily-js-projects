@@ -10,7 +10,7 @@ const pollRow = document.getElementById('poll-row');
 
 // Variables
 let polls = [];
-let POLL_ID = 0;
+let pollID = 0;
 
 function addDate(e) {
   e.preventDefault();
@@ -48,13 +48,13 @@ function displayPolls() {
 
 function saveForm(e) {
   e.preventDefault();
-  POLL_ID += 1;
+  pollID += 1;
   const poll = {};
   poll.title = titleInput.value;
   poll.location = locationInput.value;
   poll.comments = commentsInput.value;
   poll.date = eventInput.value;
-  poll.id = POLL_ID;
+  poll.id = pollID;
   polls.push(poll);
   localStorage.setItem('polls', JSON.stringify(polls));
   displayPolls();
