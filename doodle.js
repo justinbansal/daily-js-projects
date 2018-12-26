@@ -62,22 +62,12 @@ function saveForm(e) {
   displayPolls();
 }
 
-/* TODO: Create function - based on where checkbox is checked,
- * go through polls array, inside voter object, enter true or false
- */
-
-function checkBox() {
-  console.log('checkbox triggered');
-
-}
-
 // update each poll with name of voter
 function submitVote() {
-  checkBox();
   for (let i = 0; i < polls.length; i += 1) {
     const voter = {
       name: `${voteInput.value}`,
-      vote: '',
+      vote: document.getElementById(`checkbox${polls[i].id}`).checked,
     };
     polls[i].voters.push(voter);
   }
