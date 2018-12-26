@@ -6,6 +6,8 @@ const eventInput = document.getElementById('event');
 const addBtn = document.getElementById('addDate');
 const submitBtn = document.getElementById('submit');
 const pollRow = document.getElementById('poll-row');
+const voteInput = document.getElementById('voteInput');
+const voteBtn = document.getElementById('submitVote');
 
 
 // Variables
@@ -53,7 +55,13 @@ function saveForm() {
   displayPolls();
 }
 
+// update each poll with name of voter
+function submitVote(e) {
+  console.log(voteInput.value);
+}
+
 addBtn.addEventListener('click', addDate);
 submitBtn.addEventListener('click', saveForm);
+voteBtn.addEventListener('click', submitVote);
 
 displayPolls();
