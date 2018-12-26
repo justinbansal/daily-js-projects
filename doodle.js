@@ -29,16 +29,19 @@ function displayPolls() {
     polls = storedPolls;
   }
   for (let i = 0; i < polls.length; i += 1) {
+    const pollContainer = document.createElement('div');
+    pollContainer.className = 'pollContainer';
+    pollRow.appendChild(pollContainer);
     const dateHeading = document.createElement('h3');
-    pollRow.appendChild(dateHeading);
+    pollContainer.appendChild(dateHeading);
     dateHeading.innerHTML = polls[i].date;
     const checkboxLabel = document.createElement('label');
     checkboxLabel.innerHTML = 'Vote Yes';
     const voteCheck = document.createElement('INPUT');
     voteCheck.type = 'checkbox';
     voteCheck.name = 'voting';
-    pollRow.appendChild(voteCheck);
-    pollRow.insertBefore(checkboxLabel, voteCheck);
+    pollContainer.appendChild(voteCheck);
+    pollContainer.insertBefore(checkboxLabel, voteCheck);
   }
 }
 
