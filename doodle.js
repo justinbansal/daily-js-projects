@@ -60,8 +60,13 @@ function saveForm() {
  * go through polls array, inside voter object, enter true or false
  */
 
+function checkBox() {
+  console.log('checkbox triggered');
+}
+
 // update each poll with name of voter
 function submitVote() {
+  checkBox();
   for (let i = 0; i < polls.length; i += 1) {
     const voter = {
       name: `${voteInput.value}`,
