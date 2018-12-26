@@ -14,14 +14,6 @@ const voteBtn = document.getElementById('submitVote');
 let polls = [];
 let pollID = 0;
 
-function addDate(e) {
-  e.preventDefault();
-  const input = document.createElement('INPUT');
-  input.type = 'date';
-  input.name = 'event';
-  document.getElementById('dateRow').appendChild(input);
-}
-
 // loop through array of polls and render them on the page
 function displayPolls() {
   const storedPolls = JSON.parse(localStorage.getItem('polls'));
@@ -59,7 +51,6 @@ function saveForm(e) {
   const poll = {};
   poll.title = titleInput.value;
   poll.location = locationInput.value;
-  poll.comments = commentsInput.value;
   poll.date = eventInput.value;
   poll.id = pollID;
   poll.voters = [];
@@ -82,7 +73,6 @@ function submitVote() {
   window.location.reload();
 }
 
-addBtn.addEventListener('click', addDate);
 submitBtn.addEventListener('click', saveForm);
 voteBtn.addEventListener('click', submitVote);
 
