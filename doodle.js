@@ -27,7 +27,7 @@ function displayPolls() {
     polls = storedPolls;
   }
   for (let i = 0; i < polls.length; i += 1) {
-    const dateHeading = document.createElement('h1');
+    const dateHeading = document.createElement('h3');
     pollRow.appendChild(dateHeading);
     dateHeading.innerHTML = polls[i].date;
     const checkboxLabel = document.createElement('label');
