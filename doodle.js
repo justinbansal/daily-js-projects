@@ -27,6 +27,7 @@ function displayPolls() {
   const storedPolls = JSON.parse(localStorage.getItem('polls'));
   if (storedPolls) {
     polls = storedPolls;
+    pollID = polls.length;
   }
   for (let i = 0; i < polls.length; i += 1) {
     const pollContainer = document.createElement('div');
