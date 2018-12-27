@@ -2,6 +2,11 @@ form label {
     width: 100px;
 }
 
+.form-group {
+    max-width: 300px;
+    margin: 25px auto;
+}
+
 .form-check-label {
     margin-right: 25px;
 }
