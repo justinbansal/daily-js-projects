@@ -1,9 +1,7 @@
 // DOM Elements
 const titleInput = document.getElementById('title');
 const locationInput = document.getElementById('location');
-const commentsInput = document.getElementById('comments');
 const eventInput = document.getElementById('event');
-const addBtn = document.getElementById('addDate');
 const submitBtn = document.getElementById('submit');
 const pollRow = document.getElementById('poll-row');
 const voteInput = document.getElementById('voteInput');
@@ -44,6 +42,13 @@ function displayPolls() {
     voteCheck.id = `checkbox${polls[i].id}`;
     pollContainer.appendChild(voteCheck);
     pollContainer.insertBefore(checkboxLabel, voteCheck);
+    const votersList = document.createElement('ul');
+    pollContainer.appendChild(votersList);
+    for (let m = 0; m < filteredVotes.length; m += 1) {
+      const voteItem = document.createElement('li');
+      voteItem.innerHTML = filteredVotes[m].name;
+      votersList.appendChild(voteItem);
+    }
   }
 }
 
