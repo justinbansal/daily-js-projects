@@ -17,14 +17,10 @@ form label {
     width: 300px;
     padding: 15px;
     border: 1px solid slateblue;
-    position: relative;
 }
 
 .pollContainer ul {
     padding: 0;
-    position: absolute;
-    top: 40%;
-    right: 40%;
     display: none;
 }
 
