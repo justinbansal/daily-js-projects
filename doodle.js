@@ -17,6 +17,11 @@ function showVoters(ID) {
   document.getElementById(ID.fromElement.id).querySelector('ul').style.display = 'block';
 }
 
+// hide list of voters
+function hideVoters(ID) {
+  document.getElementById(ID.toElement.id).querySelector('ul').style.display = 'none';
+}
+
 // loop through array of polls and render them on the page
 function displayPolls() {
   const storedPolls = JSON.parse(localStorage.getItem('polls'));
@@ -37,6 +42,7 @@ function displayPolls() {
     const votesText = document.createElement('p');
     votesText.className = 'votesNumber';
     votesText.onmouseover = showVoters;
+    votesText.onmouseleave = hideVoters;
     pollContainer.appendChild(votesText);
     votesText.innerHTML = polls[i].votes;
     const checkboxLabel = document.createElement('label');
