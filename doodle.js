@@ -1,8 +1,14 @@
 // DOM Elements
 const titleInput = document.getElementById('title');
 const locationInput = document.getElementById('location');
-const eventInput = document.getElementById('event');
+const dateInput1 = document.getElementById('date1');
+const dateInput2 = document.getElementById('date2');
+const dateInput3 = document.getElementById('date3');
+const dateInput4 = document.getElementById('date4');
+const dateInput5 = document.getElementById('date5');
+const addBtn = document.getElementById('addDate');
 const submitBtn = document.getElementById('submit');
+const dateGroup = document.getElementById('date-group');
 const pollRow = document.getElementById('poll-row');
 const voteInput = document.getElementById('voteInput');
 const voteBtn = document.getElementById('submitVote');
@@ -11,6 +17,7 @@ const voteBtn = document.getElementById('submitVote');
 // Variables
 let polls = [];
 let pollID = 0;
+let dateID = 0;
 
 // show list of voters
 function showVoters(ID) {
@@ -65,6 +72,28 @@ function displayPolls() {
   }
 }
 
+function countDateFields() {
+  const count = document.querySelectorAll('input[name^="date"').length;
+  dateID = count + 1;
+  if (dateID === 5) {
+    addBtn.style.display = 'none';
+  }
+}
+
+function addDate(e) {
+  e.preventDefault();
+  countDateFields();
+  const label = document.createElement('label');
+  label.for = 'date';
+  label.innerHTML = 'Date';
+  const newInput = document.createElement('input');
+  newInput.type = 'date';
+  newInput.name = 'date';
+  newInput.id = `date${dateID}`;
+  dateGroup.appendChild(label);
+  dateGroup.appendChild(newInput);
+}
+
 function saveForm(e) {
   e.preventDefault();
   pollID += 1;
@@ -100,6 +129,7 @@ function submitVote() {
   window.location.reload();
 }
 
+addBtn.addEventListener('click', addDate);
 submitBtn.addEventListener('click', saveForm);
 voteBtn.addEventListener('click', submitVote);
 
