@@ -71,13 +71,20 @@ function saveForm(e) {
   const poll = {};
   poll.title = titleInput.value;
   poll.location = locationInput.value;
-  poll.date = eventInput.value;
-  poll.id = pollID;
-  poll.voters = [];
-  poll.votes = '';
+  // poll.date = eventInput.value;
+  // poll.id = pollID;
+  // poll.voters = [];
+  // poll.votes = '';
+  poll.eventDetails = [];
+  const event = {};
+  event.date = eventInput.value;
+  event.id = pollID;
+  event.voters = [];
+  event.votes = '';
+  poll.eventDetails.push(event);
   polls.push(poll);
   localStorage.setItem('polls', JSON.stringify(polls));
-  displayPolls();
+  // displayPolls();
 }
 
 // update each poll with name of voter
