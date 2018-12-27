@@ -13,8 +13,8 @@ let polls = [];
 let pollID = 0;
 
 // show list of voters
-function showVoters() {
-  console.log('showVoters triggered');
+function showVoters(ID) {
+  document.getElementById(ID.fromElement.id).querySelector('ul').style.display = 'block';
 }
 
 // loop through array of polls and render them on the page
