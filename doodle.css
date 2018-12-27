@@ -15,7 +15,15 @@ form label {
 
 .pollContainer {
     width: 300px;
-    height: 200px;
     padding: 15px;
     border: 1px solid slateblue;
+}
+
+.pollContainer ul {
+    padding: 0;
+}
+
+.pollContainer ul li {
+    list-style: none;
+    text-transform: uppercase;
 }
