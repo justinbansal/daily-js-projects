@@ -17,7 +17,7 @@ const voteBtn = document.getElementById('submitVote');
 // Variables
 let polls = [];
 let pollID = 0;
-let dateID = 0;
+let dateID = 1;
 
 // show list of voters
 function showVoters(ID) {
@@ -105,12 +105,22 @@ function saveForm(e) {
   // poll.voters = [];
   // poll.votes = '';
   poll.eventDetails = [];
-  const event = {};
-  event.date = eventInput.value;
-  event.id = pollID;
-  event.voters = [];
-  event.votes = '';
-  poll.eventDetails.push(event);
+  // create new object for each date
+  for (let d = 1; d <= dateID; d += 1) {
+    const event = {};
+    // event.date = dateInput1.value;
+    event.date = `dateInput${d}`.value;
+    event.id = pollID;
+    event.voters = [];
+    event.votes = '';
+    poll.eventDetails.push(event);
+  }
+  // const event = {};
+  // event.date = dateInput1.value;
+  // event.id = pollID;
+  // event.voters = [];
+  // event.votes = '';
+  // poll.eventDetails.push(event);
   polls.push(poll);
   localStorage.setItem('polls', JSON.stringify(polls));
   // displayPolls();
