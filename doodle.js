@@ -12,6 +12,11 @@ const voteBtn = document.getElementById('submitVote');
 let polls = [];
 let pollID = 0;
 
+// show list of voters
+function showVoters() {
+  console.log('showVoters triggered');
+}
+
 // loop through array of polls and render them on the page
 function displayPolls() {
   const storedPolls = JSON.parse(localStorage.getItem('polls'));
@@ -30,6 +35,8 @@ function displayPolls() {
     const filteredVotes = polls[i].voters.filter(voter => voter.vote === true);
     polls[i].votes = filteredVotes.length;
     const votesText = document.createElement('p');
+    votesText.className = 'votesNumber';
+    votesText.onmouseover = showVoters;
     pollContainer.appendChild(votesText);
     votesText.innerHTML = polls[i].votes;
     const checkboxLabel = document.createElement('label');
