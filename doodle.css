@@ -11,6 +11,10 @@ form label {
     margin-right: 25px;
 }
 
+.displayPolls {
+    display: none;
+}
+
 #poll-row {
     margin: 25px auto;
     text-align: center;
