@@ -7,6 +7,8 @@ const dateGroup = document.getElementById('date-group');
 const pollRow = document.getElementById('poll-row');
 const voteInput = document.getElementById('voteInput');
 const voteBtn = document.getElementById('submitVote');
+const titleHeading = document.getElementById('event-title');
+const locationHeading = document.getElementById('event-location');
 
 
 // Variables
@@ -36,7 +38,9 @@ function displayPolls() {
     pollContainer.classList = 'pollContainer col-md-3';
     pollContainer.id = polls[0].eventDetails[i].id;
     pollRow.appendChild(pollContainer);
-    const dateHeading = document.createElement('h3');
+    titleHeading.innerHTML = polls[0].title;
+    locationHeading.innerHTML = polls[0].location;
+    const dateHeading = document.createElement('h4');
     pollContainer.appendChild(dateHeading);
     dateHeading.innerHTML = polls[0].eventDetails[i].date;
     const filteredVotes = polls[0].eventDetails[i].voters.filter(voter => voter.vote === true);
