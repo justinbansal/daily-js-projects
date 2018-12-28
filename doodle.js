@@ -26,13 +26,15 @@ function hideVoters(ID) {
   document.getElementById(ID.toElement.id).querySelector('ul').style.display = 'none';
 }
 
+// show event details
+function showDetails() {
+  if (polls) {
+    document.querySelector('.displayPolls').style.display = 'block';
+  }
+}
+
 // loop through array of polls and render them on the page
 function displayPolls() {
-  const storedPolls = JSON.parse(localStorage.getItem('polls'));
-  if (storedPolls) {
-    polls = storedPolls;
-    pollID = polls.length;
-  }
   for (let i = 0; i < polls[0].eventDetails.length; i += 1) {
     const pollContainer = document.createElement('div');
     pollContainer.classList = 'pollContainer col-md-3';
@@ -99,6 +101,7 @@ function saveForm(e) {
   if (this.disabled) {
     addBtn.disabled = true;
   }
+  showDetails();
   const poll = {};
   poll.title = titleInput.value;
   poll.location = locationInput.value;
@@ -136,4 +139,14 @@ addBtn.addEventListener('click', addDate);
 submitBtn.addEventListener('click', saveForm);
 voteBtn.addEventListener('click', submitVote);
 
-displayPolls();
+function initialize() {
+  const storedPolls = JSON.parse(localStorage.getItem('polls'));
+  if (storedPolls) {
+    polls = storedPolls;
+    pollID = polls.length;
+    showDetails();
+    displayPolls();
+  }
+}
+
+initialize();
