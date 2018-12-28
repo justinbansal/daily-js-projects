@@ -49,8 +49,8 @@ function displayPolls() {
     polls[0].eventDetails[i].votes = filteredVotes.length;
     const votesText = document.createElement('p');
     votesText.className = 'votesNumber';
-    votesText.onmouseover = showVoters;
-    votesText.onmouseleave = hideVoters;
+    pollContainer.onmouseover = showVoters;
+    pollContainer.onmouseleave = hideVoters;
     pollContainer.appendChild(votesText);
     votesText.innerHTML = polls[0].eventDetails[i].votes;
     const checkboxLabel = document.createElement('label');
