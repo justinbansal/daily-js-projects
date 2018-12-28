@@ -1,12 +1,6 @@
 // DOM Elements
 const titleInput = document.getElementById('title');
 const locationInput = document.getElementById('location');
-// these should be created within the function otherwise null at document load
-// const dateInput1 = document.getElementById('date1');
-// const dateInput2 = document.getElementById('date2');
-// const dateInput3 = document.getElementById('date3');
-// const dateInput4 = document.getElementById('date4');
-// const dateInput5 = document.getElementById('date5');
 const addBtn = document.getElementById('addDate');
 const submitBtn = document.getElementById('submit');
 const dateGroup = document.getElementById('date-group');
@@ -37,22 +31,22 @@ function displayPolls() {
     polls = storedPolls;
     pollID = polls.length;
   }
-  for (let i = 0; i < polls.length; i += 1) {
+  for (let i = 0; i < polls[0].eventDetails.length; i += 1) {
     const pollContainer = document.createElement('div');
     pollContainer.classList = 'pollContainer col-md-3';
-    pollContainer.id = polls[i].id;
+    pollContainer.id = polls[0].eventDetails[i].id;
     pollRow.appendChild(pollContainer);
     const dateHeading = document.createElement('h3');
     pollContainer.appendChild(dateHeading);
-    dateHeading.innerHTML = polls[i].date;
-    const filteredVotes = polls[i].voters.filter(voter => voter.vote === true);
-    polls[i].votes = filteredVotes.length;
+    dateHeading.innerHTML = polls[0].eventDetails[i].date;
+    const filteredVotes = polls[0].eventDetails[i].voters.filter(voter => voter.vote === true);
+    polls[0].eventDetails[i].votes = filteredVotes.length;
     const votesText = document.createElement('p');
     votesText.className = 'votesNumber';
     votesText.onmouseover = showVoters;
     votesText.onmouseleave = hideVoters;
     pollContainer.appendChild(votesText);
-    votesText.innerHTML = polls[i].votes;
+    votesText.innerHTML = polls[0].eventDetails[i].votes;
     const checkboxLabel = document.createElement('label');
     checkboxLabel.className = 'form-check-label';
     checkboxLabel.innerHTML = 'Vote Yes';
@@ -60,7 +54,7 @@ function displayPolls() {
     voteCheck.type = 'checkbox';
     voteCheck.className = 'form-check-input';
     voteCheck.name = 'voting';
-    voteCheck.id = `checkbox${polls[i].id}`;
+    voteCheck.id = `checkbox${polls[0].eventDetails[i].id}`;
     pollContainer.appendChild(voteCheck);
     pollContainer.insertBefore(checkboxLabel, voteCheck);
     const votersList = document.createElement('ul');
@@ -114,17 +108,17 @@ function saveForm(e) {
   }
   polls.push(poll);
   localStorage.setItem('polls', JSON.stringify(polls));
-  // displayPolls();
+  displayPolls();
 }
 
 // update each poll with name of voter
 function submitVote() {
-  for (let i = 0; i < polls.length; i += 1) {
+  for (let i = 0; i < polls[0].eventDetails.length; i += 1) {
     const voter = {
       name: `${voteInput.value}`,
-      vote: document.getElementById(`checkbox${polls[i].id}`).checked,
+      vote: document.getElementById(`checkbox${polls[0].eventDetails[i].id}`).checked,
     };
-    polls[i].voters.push(voter);
+    polls[0].eventDetails[i].voters.push(voter);
   }
   localStorage.setItem('polls', JSON.stringify(polls));
   window.location.reload();
