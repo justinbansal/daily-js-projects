@@ -71,7 +71,7 @@ function countDateFields() {
   const count = document.querySelectorAll('input[name^="date"').length;
   dateID = count + 1;
   if (dateID === 5) {
-    addBtn.style.display = 'none';
+    addBtn.disabled = 'true';
   }
 }
 
@@ -91,6 +91,10 @@ function addDate(e) {
 
 function saveForm(e) {
   e.preventDefault();
+  this.disabled = true;
+  if (this.disabled) {
+    addBtn.disabled = true;
+  }
   const poll = {};
   poll.title = titleInput.value;
   poll.location = locationInput.value;
