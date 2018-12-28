@@ -91,7 +91,6 @@ function addDate(e) {
 
 function saveForm(e) {
   e.preventDefault();
-  pollID += 1;
   const poll = {};
   poll.title = titleInput.value;
   poll.location = locationInput.value;
@@ -99,6 +98,7 @@ function saveForm(e) {
   // create new object for each date
   const dates = document.querySelectorAll('.date');
   for (let i = 0; i < dates.length; i += 1) {
+    pollID += 1;
     const event = {};
     event.date = dates[i].value;
     event.id = pollID;
