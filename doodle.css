@@ -15,13 +15,14 @@ form label {
     margin: 25px auto;
     text-align: center;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .pollContainer {
     width: 300px;
     padding: 15px;
     border: 1px solid slateblue;
+    margin: 1%;
 }
 
 .pollContainer ul {
