@@ -10,3 +10,9 @@
 ## Project 2
 
 ### Fun with an API
+
+## Project 3
+
+### Polling App
+
+* Create a poll and vote on different dates
