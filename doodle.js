@@ -16,16 +16,6 @@ let polls = [];
 let pollID = 0;
 let dateID = 1;
 
-// show list of voters
-function showVoters(ID) {
-  document.getElementById(ID.fromElement.id).querySelector('ul').style.display = 'block';
-}
-
-// hide list of voters
-function hideVoters(ID) {
-  document.getElementById(ID.toElement.id).querySelector('ul').style.display = 'none';
-}
-
 // show event details
 function showDetails() {
   if (polls) {
@@ -49,8 +39,6 @@ function displayPolls() {
     polls[0].eventDetails[i].votes = filteredVotes.length;
     const votesText = document.createElement('p');
     votesText.className = 'votesNumber';
-    pollContainer.onmouseover = showVoters;
-    pollContainer.onmouseleave = hideVoters;
     pollContainer.appendChild(votesText);
     votesText.innerHTML = polls[0].eventDetails[i].votes;
     const checkboxLabel = document.createElement('label');
