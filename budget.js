@@ -51,7 +51,7 @@ function updateExpenseTotal(total) {
 
 // Calculate expense total
 function calculateExpenseTotal() {
-  const MONTHLY_TOTAL = EXPENSES_ARRAY.reduce((previousValue, currentValue) => Number(previousValue) + Number(currentValue.amount), 0);
+  const MONTHLY_TOTAL = EXPENSES_ARRAY.reduce((previousValue, currentValue) => previousValue + currentValue.amount, 0);
   updateExpenseTotal(MONTHLY_TOTAL);
 }
 
@@ -59,7 +59,7 @@ function calculateExpenseTotal() {
 function newExpense() {
   const EXPENSE_TYPE = document.querySelector('select[id="selectExpenseType"]').value;
   const EXPENSE_NAME = document.querySelector('input[name="expenseName"]').value;
-  const EXPENSE_AMOUNT = document.querySelector('input[name="expenseAmount"]').value;
+  const EXPENSE_AMOUNT = Number(document.querySelector('input[name="expenseAmount"]').value);
   const EXPENSE = {};
   EXPENSE.type = EXPENSE_TYPE;
   EXPENSE.name = EXPENSE_NAME;
