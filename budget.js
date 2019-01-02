@@ -1,6 +1,10 @@
+// Variables
+const EXPENSES_ARRAY = [];
+
 // DOM Elements
 const REGISTER_BUTTON = document.querySelector('.registerBtn');
 const SIGN_IN_FORM = document.querySelector('.sign-in');
+const ADD_EXPENSE_BUTTON = document.querySelector('.addExpenseBtn');
 
 // Greet User
 function displayGreeting(username) {
@@ -40,7 +44,22 @@ function registerUser() {
   localStorage.setItem('password', PASSWORD);
 }
 
+/* CREATE NEW EXPENSE
+ *
+*/
+function newExpense() {
+  const EXPENSE_TYPE = document.querySelector('select[id="selectExpenseType"]').value;
+  const EXPENSE_NAME = document.querySelector('input[name="expenseName"]').value;
+  const EXPENSE_AMOUNT = document.querySelector('input[name="expenseAmount"]').value;
+  const EXPENSE = {};
+  EXPENSE.type = EXPENSE_TYPE;
+  EXPENSE.name = EXPENSE_NAME;
+  EXPENSE.amount = EXPENSE_AMOUNT;
+  EXPENSES_ARRAY.push(EXPENSE);
+}
+
 // Event Listeners
 REGISTER_BUTTON.addEventListener('click', registerUser);
+ADD_EXPENSE_BUTTON.addEventListener('click', newExpense);
 
 isRegistered();
