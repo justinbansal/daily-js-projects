@@ -58,7 +58,6 @@ function calculateExpenseTotal() {
 // Filter by expense type and display both name & amount
 function displayExpense(type, name, amount) {
   const LIST = document.querySelector(`.${type.toLowerCase()}`);
-  EXPENSES_ARRAY.filter(expense => expense.type === type);
   const EXPENSE_NAME = document.createElement('li');
   EXPENSE_NAME.innerHTML = name;
   LIST.appendChild(EXPENSE_NAME);
