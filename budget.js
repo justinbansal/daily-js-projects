@@ -58,13 +58,17 @@ function calculateExpenseTotal() {
 // Filter by expense type and display both name & amount
 function displayExpense(type, name, amount) {
   const LIST = document.querySelector(`.${type.toLowerCase()}`);
-  const EXPENSE_NAME = document.createElement('li');
-  EXPENSE_NAME.innerHTML = name;
-  LIST.appendChild(EXPENSE_NAME);
-  const EXPENSE_AMOUNT = document.createElement('li');
+  const DIV_CONTAINER = document.createElement('div');
+  DIV_CONTAINER.className = 'expenseContainer';
+  LIST.appendChild(DIV_CONTAINER);
+  const EXPENSE_NAME = document.createElement('p');
+  EXPENSE_NAME.className = 'expenseName';
+  EXPENSE_NAME.innerHTML = name.toUpperCase();
+  DIV_CONTAINER.append(EXPENSE_NAME);
+  const EXPENSE_AMOUNT = document.createElement('p');
+  EXPENSE_AMOUNT.className = 'expenseAmount';
   EXPENSE_AMOUNT.innerHTML = amount;
-  EXPENSE_NAME.appendChild(EXPENSE_AMOUNT);
-  EXPENSE_AMOUNT.style.textIndent = '50px';
+  DIV_CONTAINER.appendChild(EXPENSE_AMOUNT);
 }
 
 // CREATE NEW EXPENSE
