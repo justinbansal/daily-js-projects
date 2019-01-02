@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>Welcome to Budgie</h1>
+                <h1>Personal Budget</h1>
                 <h3 class="greeting"></h3>
                 <div class="sign-in">
                     <form>
@@ -27,6 +27,28 @@
                         </div>
                         <button class="btn btn-primary registerBtn">Register</button>
                     </form>
+                </div>
+                <div class="budget-app">
+                    <h4>Add a new expense</h4>
+                    <div class="form-group">
+                        <label for="selectExpenseType">Select Type:</label>
+                        <select class="form-control" id="selectExpenseType">
+                            <option>Home</option>
+                            <option>Personal</option>
+                            <option>Transportation</option>
+                            <option>Entertainment</option>
+                            <option>Misc</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseName">Name</label>
+                        <input type="text" name="expenseName" class="form-control" placeholder="Enter name">
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseAmount">Amount</label>
+                        <input type="number" name="expenseAmount" class="form-control" placeholder="Enter amount">
+                    </div>
+                    <button class="btn btn-primary addExpenseBtn">Add New Expense</button>
                 </div>
             </div>
         </div>
