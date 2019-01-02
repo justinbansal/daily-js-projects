@@ -44,9 +44,18 @@ function registerUser() {
   localStorage.setItem('password', PASSWORD);
 }
 
-/* CREATE NEW EXPENSE
- *
-*/
+// Update monthly expense total
+function updateExpenseTotal(total) {
+  document.querySelector('.monthlyTotal').innerHTML = total;
+}
+
+// Calculate expense total
+function calculateExpenseTotal() {
+  const MONTHLY_TOTAL = EXPENSES_ARRAY.reduce((previousValue, currentValue) => Number(previousValue) + Number(currentValue.amount), 0);
+  updateExpenseTotal(MONTHLY_TOTAL);
+}
+
+// CREATE NEW EXPENSE
 function newExpense() {
   const EXPENSE_TYPE = document.querySelector('select[id="selectExpenseType"]').value;
   const EXPENSE_NAME = document.querySelector('input[name="expenseName"]').value;
@@ -56,6 +65,7 @@ function newExpense() {
   EXPENSE.name = EXPENSE_NAME;
   EXPENSE.amount = EXPENSE_AMOUNT;
   EXPENSES_ARRAY.push(EXPENSE);
+  calculateExpenseTotal();
 }
 
 // Event Listeners
