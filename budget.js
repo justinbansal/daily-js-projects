@@ -55,6 +55,19 @@ function calculateExpenseTotal() {
   updateExpenseTotal(MONTHLY_TOTAL);
 }
 
+// Filter by expense type and display both name & amount
+function displayExpense(type, name, amount) {
+  const LIST = document.querySelector(`.${type.toLowerCase()}`);
+  EXPENSES_ARRAY.filter(expense => expense.type === type);
+  const EXPENSE_NAME = document.createElement('li');
+  EXPENSE_NAME.innerHTML = name;
+  LIST.appendChild(EXPENSE_NAME);
+  const EXPENSE_AMOUNT = document.createElement('li');
+  EXPENSE_AMOUNT.innerHTML = amount;
+  EXPENSE_NAME.appendChild(EXPENSE_AMOUNT);
+  EXPENSE_AMOUNT.style.textIndent = '50px';
+}
+
 // CREATE NEW EXPENSE
 function newExpense() {
   const EXPENSE_TYPE = document.querySelector('select[id="selectExpenseType"]').value;
@@ -66,6 +79,7 @@ function newExpense() {
   EXPENSE.amount = EXPENSE_AMOUNT;
   EXPENSES_ARRAY.push(EXPENSE);
   calculateExpenseTotal();
+  displayExpense(EXPENSE_TYPE, EXPENSE_NAME, EXPENSE_AMOUNT);
 }
 
 // Event Listeners
