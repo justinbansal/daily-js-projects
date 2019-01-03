@@ -3,8 +3,10 @@ let expenseArray = [];
 let expenseID = 0;
 
 // DOM Elements
-const REGISTER_BUTTON = document.querySelector('.registerBtn');
+const LOGIN_BUTTON = document.querySelector('.loginBtn');
 const SIGN_IN_FORM = document.querySelector('.sign-in');
+const SIGN_OUT_BUTTON = document.querySelector('.signOutBtn');
+const MAIN_APP = document.querySelector('.budget-app');
 const ADD_EXPENSE_BUTTON = document.querySelector('.addExpenseBtn');
 
 // Greet User
@@ -15,24 +17,12 @@ function displayGreeting(username) {
 
 // Ask User to Register
 function displayRegisterMessage() {
-  document.querySelector('.greeting').innerHTML = 'Please Register Below';
+  document.querySelector('.greeting').innerHTML = 'Please Register First';
 }
 
-/* CHECK IF REGISTERED USER
- * IF YES, DISPLAY GREETING, HIDE SIGN IN FORM
- * IF NO, DISPLAY REGISTER MESSAGE AND SHOW FORM
-*/
-
-function isRegistered() {
-  const USERNAME = localStorage.getItem('username');
-  if ((USERNAME) && (localStorage.getItem('password'))) {
-    displayGreeting(USERNAME);
-    SIGN_IN_FORM.style.display = 'none';
-    return true;
-  }
-  displayRegisterMessage();
-  SIGN_IN_FORM.style.display = 'block';
-  return false;
+// Sign Out
+function signOut() {
+  window.location.reload();
 }
 
 /* REGISTER FUNCTION
@@ -43,6 +33,36 @@ function registerUser() {
   const PASSWORD = document.querySelector('input[id="password"]').value;
   localStorage.setItem('username', USERNAME);
   localStorage.setItem('password', PASSWORD);
+  alert('You have successfully registered!');
+}
+
+/* CHECK IF REGISTERED USER
+ * IF YES, DISPLAY GREETING, HIDE SIGN IN FORM
+ * IF NO, DISPLAY REGISTER MESSAGE AND SHOW FORM
+ * RUNS WHEN USER CLICKS LOGIN, VERIFIES USERNAME & PASSWORD EXISTS
+ * DISPLAYS ERROR MESSAGE IF NOT REGISTERED, ASKS TO REGISTER FIRST
+*/
+
+function isRegistered(e) {
+  e.preventDefault();
+  const USERNAME_PROVIDED = document.querySelector('input[id="username"]').value;
+  const PASSWORD_PROVIDED = document.querySelector('input[id="password"]').value;
+  const USERNAME_STORED = localStorage.getItem('username');
+  const PASSWORD_STORED = localStorage.getItem('password');
+  const REGISTER_BUTTON = document.querySelector('.registerBtn');
+  if ((USERNAME_PROVIDED === USERNAME_STORED) && (PASSWORD_PROVIDED === PASSWORD_STORED)) {
+    displayGreeting(USERNAME_STORED);
+    SIGN_IN_FORM.style.display = 'none';
+    MAIN_APP.style.display = 'block';
+  } else {
+    alert('You must register first!');
+    displayRegisterMessage();
+    SIGN_IN_FORM.style.display = 'block';
+    LOGIN_BUTTON.style.display = 'none';
+    MAIN_APP.style.display = 'none';
+    REGISTER_BUTTON.style.display = 'block';
+    REGISTER_BUTTON.addEventListener('click', registerUser);
+  }
 }
 
 // Update monthly expense total
@@ -142,7 +162,8 @@ function newExpense() {
 }
 
 // Event Listeners
-REGISTER_BUTTON.addEventListener('click', registerUser);
+LOGIN_BUTTON.addEventListener('click', isRegistered);
+SIGN_OUT_BUTTON.addEventListener('click', signOut);
 ADD_EXPENSE_BUTTON.addEventListener('click', newExpense);
 
-isRegistered();
+// isRegistered();
