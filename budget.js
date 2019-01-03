@@ -55,6 +55,18 @@ function calculateExpenseTotal() {
   updateExpenseTotal(MONTHLY_TOTAL);
 }
 
+// Update expense subtotal
+function updateXPSubtotal(total, type) {
+  document.querySelector(`.${type.toLowerCase()}__subtotal`).innerHTML = total;
+}
+
+// Calculate expense subtotal
+function calculateXPSubtotal(type) {
+  const FILTERED_EXPENSES = EXPENSES_ARRAY.filter(expense => expense.type === type);
+  const XP_SUBTOTAL = FILTERED_EXPENSES.reduce((previousValue, currentValue) => previousValue + currentValue.amount, 0);
+  updateXPSubtotal(XP_SUBTOTAL, type);
+}
+
 // Filter by expense type and display both name & amount
 function displayExpense(type, name, amount) {
   const LIST = document.querySelector(`.${type.toLowerCase()}`);
@@ -81,6 +93,7 @@ function newExpense() {
   EXPENSE.name = EXPENSE_NAME;
   EXPENSE.amount = EXPENSE_AMOUNT;
   EXPENSES_ARRAY.push(EXPENSE);
+  calculateXPSubtotal(EXPENSE_TYPE);
   calculateExpenseTotal();
   displayExpense(EXPENSE_TYPE, EXPENSE_NAME, EXPENSE_AMOUNT);
 }
