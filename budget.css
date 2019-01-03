@@ -3,8 +3,15 @@
     text-align: center;
     border: 1px solid black;
     margin: 10px auto;
+    position: relative;
 }
 
 .subtotalContainer {
     margin-left: 50px;
+}
+
+.deleteBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
