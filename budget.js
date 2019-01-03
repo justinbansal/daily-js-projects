@@ -1,5 +1,5 @@
 // Variables
-const EXPENSES_ARRAY = [];
+let expenseArray = [];
 let expenseID = 0;
 
 // DOM Elements
@@ -52,7 +52,7 @@ function updateExpenseTotal(total) {
 
 // Calculate expense total
 function calculateExpenseTotal() {
-  const MONTHLY_TOTAL = EXPENSES_ARRAY.reduce((previousValue, currentValue) => previousValue + currentValue.amount, 0);
+  const MONTHLY_TOTAL = expenseArray.reduce((previous, current) => previous + current.amount, 0);
   updateExpenseTotal(MONTHLY_TOTAL);
 }
 
@@ -63,30 +63,60 @@ function updateXPSubtotal(total, type) {
 
 // Calculate expense subtotal
 function calculateXPSubtotal(type) {
-  const FILTERED_EXPENSES = EXPENSES_ARRAY.filter(expense => expense.type === type);
-  const XP_SUBTOTAL = FILTERED_EXPENSES.reduce((previousValue, currentValue) => previousValue + currentValue.amount, 0);
+  const FILTERED_EXPENSES = expenseArray.filter(expense => expense.type === type);
+  const XP_SUBTOTAL = FILTERED_EXPENSES.reduce((previous, current) => previous + current.amount, 0);
   updateXPSubtotal(XP_SUBTOTAL, type);
 }
 
-// Filter by expense type and display both name & amount
-function displayExpense(type, name, amount, id) {
-  const LIST = document.querySelector(`.${type.toLowerCase()}`);
-  const DIV_CONTAINER = document.createElement('div');
-  const DELETE_BTN = document.createElement('button');
-  DELETE_BTN.classList = 'btn btn-danger deleteBtn';
-  DELETE_BTN.innerHTML = 'X';
-  DIV_CONTAINER.appendChild(DELETE_BTN);
-  DIV_CONTAINER.className = 'expenseContainer';
-  DIV_CONTAINER.id = id;
-  LIST.appendChild(DIV_CONTAINER);
-  const EXPENSE_NAME = document.createElement('p');
-  EXPENSE_NAME.className = 'expenseName';
-  EXPENSE_NAME.innerHTML = name.toUpperCase();
-  DIV_CONTAINER.append(EXPENSE_NAME);
-  const EXPENSE_AMOUNT = document.createElement('p');
-  EXPENSE_AMOUNT.className = 'expenseAmount';
-  EXPENSE_AMOUNT.innerHTML = amount;
-  DIV_CONTAINER.appendChild(EXPENSE_AMOUNT);
+/* Filter by expense type and display both name & amount
+ * Needs to add to page based on what is in expense array
+ * Use object deconstruction to set variables
+ */
+function displayExpense() {
+  for (let expense = 0; expense < expenseArray.length; expense += 1) {
+    const {
+      type, name, amount, id,
+    } = expenseArray[expense];
+    const LIST = document.querySelector(`.${type.toLowerCase()}`);
+    const DIV_CONTAINER = document.createElement('div');
+    const DELETE_BTN = document.createElement('button');
+    DELETE_BTN.classList = 'btn btn-danger deleteBtn';
+    DELETE_BTN.innerHTML = 'X';
+    DELETE_BTN.onclick = handleDeleteButton;
+    DIV_CONTAINER.appendChild(DELETE_BTN);
+    DIV_CONTAINER.className = 'expenseContainer';
+    DIV_CONTAINER.id = id;
+    LIST.appendChild(DIV_CONTAINER);
+    const EXPENSE_NAME = document.createElement('p');
+    EXPENSE_NAME.className = 'expenseName';
+    EXPENSE_NAME.innerHTML = name.toUpperCase();
+    DIV_CONTAINER.append(EXPENSE_NAME);
+    const EXPENSE_AMOUNT = document.createElement('p');
+    EXPENSE_AMOUNT.className = 'expenseAmount';
+    EXPENSE_AMOUNT.innerHTML = amount;
+    DIV_CONTAINER.appendChild(EXPENSE_AMOUNT);
+  }
+}
+
+// Remove all matching elements from DOM
+function clearExpenses() {
+  document.querySelectorAll('.expenseContainer').forEach(expense => expense.parentNode.removeChild(expense));
+}
+
+/* Delete Expense Function
+ * Matches ID in expense array and creates new array without id
+*/
+function deleteExpense(ID) {
+  const UPDATED_XP_ARRAY = expenseArray.filter(expense => expense.id !== ID);
+  expenseArray = UPDATED_XP_ARRAY;
+  clearExpenses();
+  displayExpense();
+}
+
+// Handle Delete Button Click
+function handleDeleteButton(e) {
+  const CLICKED_XP = Number(e.target.parentElement.id);
+  deleteExpense(CLICKED_XP);
 }
 
 // CREATE NEW EXPENSE
@@ -100,10 +130,11 @@ function newExpense() {
   EXPENSE.name = EXPENSE_NAME;
   EXPENSE.amount = EXPENSE_AMOUNT;
   EXPENSE.id = expenseID;
-  EXPENSES_ARRAY.push(EXPENSE);
+  expenseArray.push(EXPENSE);
   calculateXPSubtotal(EXPENSE_TYPE);
   calculateExpenseTotal();
-  displayExpense(EXPENSE_TYPE, EXPENSE_NAME, EXPENSE_AMOUNT, expenseID);
+  clearExpenses();
+  displayExpense();
 }
 
 // Event Listeners
