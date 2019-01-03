@@ -107,10 +107,14 @@ function clearExpenses() {
  * Matches ID in expense array and creates new array without id
 */
 function deleteExpense(ID) {
+  const FILTERED_ARRAY = expenseArray.filter(expense => expense.id === ID);
   const UPDATED_XP_ARRAY = expenseArray.filter(expense => expense.id !== ID);
+  const EXPENSE_TYPE = FILTERED_ARRAY[0].type;
   expenseArray = UPDATED_XP_ARRAY;
   clearExpenses();
   displayExpense();
+  calculateXPSubtotal(EXPENSE_TYPE);
+  calculateExpenseTotal();
 }
 
 // Handle Delete Button Click
