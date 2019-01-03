@@ -1,5 +1,6 @@
 // Variables
 const EXPENSES_ARRAY = [];
+let expenseID = 0;
 
 // DOM Elements
 const REGISTER_BUTTON = document.querySelector('.registerBtn');
@@ -68,10 +69,15 @@ function calculateXPSubtotal(type) {
 }
 
 // Filter by expense type and display both name & amount
-function displayExpense(type, name, amount) {
+function displayExpense(type, name, amount, id) {
   const LIST = document.querySelector(`.${type.toLowerCase()}`);
   const DIV_CONTAINER = document.createElement('div');
+  const DELETE_BTN = document.createElement('button');
+  DELETE_BTN.classList = 'btn btn-danger deleteBtn';
+  DELETE_BTN.innerHTML = 'X';
+  DIV_CONTAINER.appendChild(DELETE_BTN);
   DIV_CONTAINER.className = 'expenseContainer';
+  DIV_CONTAINER.id = id;
   LIST.appendChild(DIV_CONTAINER);
   const EXPENSE_NAME = document.createElement('p');
   EXPENSE_NAME.className = 'expenseName';
@@ -85,6 +91,7 @@ function displayExpense(type, name, amount) {
 
 // CREATE NEW EXPENSE
 function newExpense() {
+  expenseID += 1;
   const EXPENSE_TYPE = document.querySelector('select[id="selectExpenseType"]').value;
   const EXPENSE_NAME = document.querySelector('input[name="expenseName"]').value;
   const EXPENSE_AMOUNT = Number(document.querySelector('input[name="expenseAmount"]').value);
@@ -92,10 +99,11 @@ function newExpense() {
   EXPENSE.type = EXPENSE_TYPE;
   EXPENSE.name = EXPENSE_NAME;
   EXPENSE.amount = EXPENSE_AMOUNT;
+  EXPENSE.id = expenseID;
   EXPENSES_ARRAY.push(EXPENSE);
   calculateXPSubtotal(EXPENSE_TYPE);
   calculateExpenseTotal();
-  displayExpense(EXPENSE_TYPE, EXPENSE_NAME, EXPENSE_AMOUNT);
+  displayExpense(EXPENSE_TYPE, EXPENSE_NAME, EXPENSE_AMOUNT, expenseID);
 }
 
 // Event Listeners
