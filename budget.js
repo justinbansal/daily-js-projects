@@ -8,6 +8,7 @@ const LOGIN_BUTTON = document.querySelector('.loginBtn');
 const SIGN_IN_FORM = document.querySelector('.sign-in');
 const SIGN_OUT_BUTTON = document.querySelector('.signOutBtn');
 const MAIN_APP = document.querySelector('.budget-app');
+const ADD_INCOME_BUTTON = document.querySelector('.addIncomeBtn');
 const ADD_EXPENSE_BUTTON = document.querySelector('.addExpenseBtn');
 
 // Greet User
@@ -228,7 +229,14 @@ function newExpense() {
   displayExpense();
 }
 
+// ADD INCOME
+function addIncome() {
+  const INCOME_AMOUNT = Number(document.querySelector('input[name="income"]').value);
+  document.querySelector('.monthlyIncome').innerHTML = INCOME_AMOUNT;
+}
+
 // Event Listeners
 LOGIN_BUTTON.addEventListener('click', isRegistered);
 SIGN_OUT_BUTTON.addEventListener('click', signOut);
 ADD_EXPENSE_BUTTON.addEventListener('click', newExpense);
+ADD_INCOME_BUTTON.addEventListener('click', addIncome);
