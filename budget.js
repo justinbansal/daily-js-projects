@@ -39,10 +39,19 @@ function showApplication() {
   MAIN_APP.style.display = 'block';
 }
 
+// Retrieve expense data
+function getExpenses() {
+  const EXPENSES = JSON.parse(localStorage.getItem('expenses'));
+  if (EXPENSES) {
+    expenseArray = EXPENSES;
+  }
+}
+
 // Checks Authentication
 function isAuthenticated() {
   if (userAuthenticated) {
     showApplication();
+    getExpenses();
   } else {
     hideApplication();
   }
@@ -52,6 +61,7 @@ function isAuthenticated() {
 function signOut() {
   userAuthenticated = false;
   isAuthenticated();
+  localStorage.setItem('expenses', JSON.stringify(expenseArray));
 }
 
 /* REGISTER FUNCTION
@@ -86,6 +96,7 @@ function isRegistered(e) {
     displayGreeting(USERNAME_STORED);
     SIGN_IN_FORM.style.display = 'none';
     MAIN_APP.style.display = 'block';
+    getExpenses();
   } else {
     alert('You must register first!');
     displayRegisterMessage('Please register below');
