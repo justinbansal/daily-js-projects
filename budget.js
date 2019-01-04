@@ -24,6 +24,11 @@ function displayRegisterMessage(message) {
   document.querySelector('.greeting').innerHTML = message;
 }
 
+// Convert to Currency
+function formatNumber(amount) {
+  return `$ ${amount.toFixed(2)}`;
+}
+
 // if userAuthenticated false, hide app
 function hideApplication() {
   SIGN_IN_FORM.style.display = 'block';
@@ -48,8 +53,12 @@ function showApplication() {
 function displayExpense() {
   for (let expense = 0; expense < expenseArray.length; expense += 1) {
     const {
-      type, name, amount, id,
+      type, name, id,
     } = expenseArray[expense];
+    let {
+      amount,
+    } = expenseArray[expense];
+    amount = formatNumber(amount);
     const LIST = document.querySelector(`.${type.toLowerCase()}`);
     const DIV_CONTAINER = document.createElement('div');
     const DELETE_BTN = document.createElement('button');
@@ -78,7 +87,8 @@ function displayExpense() {
 
 // Update monthly expense total
 function updateExpenseTotal(total) {
-  document.querySelector('.monthlyTotal').innerHTML = total;
+  const FORMATTED_TOTAL = formatNumber(total);
+  document.querySelector('.monthlyTotal').innerHTML = FORMATTED_TOTAL;
 }
 
 // Check Income
@@ -90,7 +100,8 @@ function checkIncome() {
 // Calculate balance, income minus expenses
 function calculateBalance(expenses) {
   checkIncome();
-  const BALANCE = incomeAmount - expenses;
+  let BALANCE = incomeAmount - expenses;
+  BALANCE = formatNumber(BALANCE);
   document.querySelector('.balance').innerHTML = BALANCE;
 }
 
@@ -196,7 +207,8 @@ function isRegistered(e) {
 
 // Update expense subtotal
 function updateXPSubtotal(total, type) {
-  document.querySelector(`.${type.toLowerCase()}__subtotal`).innerHTML = total;
+  const FORMATTED_TOTAL = formatNumber(total);
+  document.querySelector(`.${type.toLowerCase()}__subtotal`).innerHTML = FORMATTED_TOTAL;
 }
 
 // Calculate expense subtotal
@@ -267,6 +279,7 @@ function newExpense() {
 // ADD INCOME
 function addIncome() {
   checkIncome();
+  incomeAmount = formatNumber(incomeAmount);
   document.querySelector('.monthlyIncome').innerHTML = incomeAmount;
   calculateExpenseTotal();
 }
