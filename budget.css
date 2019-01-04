@@ -1,5 +1,6 @@
 :root {
     --expenseBackground: #FFFFFF;
+    --expenseFontColor: #333333;
 }
 
 .budget-app {
@@ -13,6 +14,7 @@
     margin: 10px auto;
     position: relative;
     background: var(--expenseBackground);
+    color: var(--expenseFontColor);
 }
 
 .subtotalContainer {
