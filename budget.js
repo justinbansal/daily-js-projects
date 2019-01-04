@@ -104,6 +104,11 @@ function displayExpense() {
     DELETE_BTN.innerHTML = 'X';
     DELETE_BTN.onclick = handleDeleteButton;
     DIV_CONTAINER.appendChild(DELETE_BTN);
+    const EDIT_BTN = document.createElement('button');
+    EDIT_BTN.classList = 'btn btn-primary editBtn';
+    EDIT_BTN.innerHTML = 'EDIT';
+    EDIT_BTN.onclick = editExpense;
+    DIV_CONTAINER.appendChild(EDIT_BTN);
     DIV_CONTAINER.className = 'expenseContainer';
     DIV_CONTAINER.id = id;
     LIST.appendChild(DIV_CONTAINER);
@@ -121,6 +126,22 @@ function displayExpense() {
 // Remove all matching elements from DOM
 function clearExpenses() {
   document.querySelectorAll('.expenseContainer').forEach(expense => expense.parentNode.removeChild(expense));
+}
+
+// Edit Expense Function
+function editExpense(e) {
+  const CLICKED_XP = Number(e.target.parentElement.id);
+  const FILTERED_ARRAY = expenseArray.filter(expense => expense.id === CLICKED_XP);
+  const NEW_NAME = prompt('Enter new expense name');
+  const NEW_AMOUNT = prompt('Enter new expense amount');
+  if (NEW_NAME) {
+    FILTERED_ARRAY[0].name = NEW_NAME;
+  }
+  if (NEW_AMOUNT) {
+    FILTERED_ARRAY[0].amount = NEW_AMOUNT;
+  }
+  clearExpenses();
+  displayExpense();
 }
 
 /* Delete Expense Function
@@ -165,5 +186,3 @@ function newExpense() {
 LOGIN_BUTTON.addEventListener('click', isRegistered);
 SIGN_OUT_BUTTON.addEventListener('click', signOut);
 ADD_EXPENSE_BUTTON.addEventListener('click', newExpense);
-
-// isRegistered();
