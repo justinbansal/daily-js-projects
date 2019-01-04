@@ -1,4 +1,5 @@
 // Variables
+let incomeAmount;
 let expenseArray = [];
 let expenseID = 0;
 let userAuthenticated = false;
@@ -40,11 +41,73 @@ function showApplication() {
   MAIN_APP.style.display = 'block';
 }
 
+/* Filter by expense type and display both name & amount
+ * Needs to add to page based on what is in expense array
+ * Use object deconstruction to set variables
+ */
+function displayExpense() {
+  for (let expense = 0; expense < expenseArray.length; expense += 1) {
+    const {
+      type, name, amount, id,
+    } = expenseArray[expense];
+    const LIST = document.querySelector(`.${type.toLowerCase()}`);
+    const DIV_CONTAINER = document.createElement('div');
+    const DELETE_BTN = document.createElement('button');
+    DELETE_BTN.classList = 'btn btn-danger deleteBtn';
+    DELETE_BTN.innerHTML = 'X';
+    DELETE_BTN.onclick = handleDeleteButton;
+    DIV_CONTAINER.appendChild(DELETE_BTN);
+    const EDIT_BTN = document.createElement('button');
+    EDIT_BTN.classList = 'btn btn-primary editBtn';
+    EDIT_BTN.innerHTML = 'EDIT';
+    EDIT_BTN.onclick = editExpense;
+    DIV_CONTAINER.appendChild(EDIT_BTN);
+    DIV_CONTAINER.className = 'expenseContainer';
+    DIV_CONTAINER.id = id;
+    LIST.appendChild(DIV_CONTAINER);
+    const EXPENSE_NAME = document.createElement('p');
+    EXPENSE_NAME.className = 'expenseName';
+    EXPENSE_NAME.innerHTML = name.toUpperCase();
+    DIV_CONTAINER.append(EXPENSE_NAME);
+    const EXPENSE_AMOUNT = document.createElement('p');
+    EXPENSE_AMOUNT.className = 'expenseAmount';
+    EXPENSE_AMOUNT.innerHTML = amount;
+    DIV_CONTAINER.appendChild(EXPENSE_AMOUNT);
+  }
+}
+
+// Update monthly expense total
+function updateExpenseTotal(total) {
+  document.querySelector('.monthlyTotal').innerHTML = total;
+}
+
+// Check Income
+function checkIncome() {
+  incomeAmount = Number(document.querySelector('input[name="income"]').value);
+  return incomeAmount;
+}
+
+// Calculate balance, income minus expenses
+function calculateBalance(expenses) {
+  checkIncome();
+  const BALANCE = incomeAmount - expenses;
+  document.querySelector('.balance').innerHTML = BALANCE;
+}
+
+// Calculate expense total
+function calculateExpenseTotal() {
+  const MONTHLY_TOTAL = expenseArray.reduce((previous, current) => previous + current.amount, 0);
+  updateExpenseTotal(MONTHLY_TOTAL);
+  calculateBalance(MONTHLY_TOTAL);
+}
+
 // Retrieve expense data
 function getExpenses() {
   const EXPENSES = JSON.parse(localStorage.getItem('expenses'));
   if (EXPENSES) {
     expenseArray = EXPENSES;
+    displayExpense();
+    calculateExpenseTotal();
   }
 }
 
@@ -109,17 +172,6 @@ function isRegistered(e) {
   }
 }
 
-// Update monthly expense total
-function updateExpenseTotal(total) {
-  document.querySelector('.monthlyTotal').innerHTML = total;
-}
-
-// Calculate expense total
-function calculateExpenseTotal() {
-  const MONTHLY_TOTAL = expenseArray.reduce((previous, current) => previous + current.amount, 0);
-  updateExpenseTotal(MONTHLY_TOTAL);
-}
-
 // Update expense subtotal
 function updateXPSubtotal(total, type) {
   document.querySelector(`.${type.toLowerCase()}__subtotal`).innerHTML = total;
@@ -130,41 +182,6 @@ function calculateXPSubtotal(type) {
   const FILTERED_EXPENSES = expenseArray.filter(expense => expense.type === type);
   const XP_SUBTOTAL = FILTERED_EXPENSES.reduce((previous, current) => previous + current.amount, 0);
   updateXPSubtotal(XP_SUBTOTAL, type);
-}
-
-/* Filter by expense type and display both name & amount
- * Needs to add to page based on what is in expense array
- * Use object deconstruction to set variables
- */
-function displayExpense() {
-  for (let expense = 0; expense < expenseArray.length; expense += 1) {
-    const {
-      type, name, amount, id,
-    } = expenseArray[expense];
-    const LIST = document.querySelector(`.${type.toLowerCase()}`);
-    const DIV_CONTAINER = document.createElement('div');
-    const DELETE_BTN = document.createElement('button');
-    DELETE_BTN.classList = 'btn btn-danger deleteBtn';
-    DELETE_BTN.innerHTML = 'X';
-    DELETE_BTN.onclick = handleDeleteButton;
-    DIV_CONTAINER.appendChild(DELETE_BTN);
-    const EDIT_BTN = document.createElement('button');
-    EDIT_BTN.classList = 'btn btn-primary editBtn';
-    EDIT_BTN.innerHTML = 'EDIT';
-    EDIT_BTN.onclick = editExpense;
-    DIV_CONTAINER.appendChild(EDIT_BTN);
-    DIV_CONTAINER.className = 'expenseContainer';
-    DIV_CONTAINER.id = id;
-    LIST.appendChild(DIV_CONTAINER);
-    const EXPENSE_NAME = document.createElement('p');
-    EXPENSE_NAME.className = 'expenseName';
-    EXPENSE_NAME.innerHTML = name.toUpperCase();
-    DIV_CONTAINER.append(EXPENSE_NAME);
-    const EXPENSE_AMOUNT = document.createElement('p');
-    EXPENSE_AMOUNT.className = 'expenseAmount';
-    EXPENSE_AMOUNT.innerHTML = amount;
-    DIV_CONTAINER.appendChild(EXPENSE_AMOUNT);
-  }
 }
 
 // Remove all matching elements from DOM
@@ -231,8 +248,9 @@ function newExpense() {
 
 // ADD INCOME
 function addIncome() {
-  const INCOME_AMOUNT = Number(document.querySelector('input[name="income"]').value);
-  document.querySelector('.monthlyIncome').innerHTML = INCOME_AMOUNT;
+  checkIncome();
+  document.querySelector('.monthlyIncome').innerHTML = incomeAmount;
+  calculateExpenseTotal();
 }
 
 // Event Listeners
