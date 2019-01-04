@@ -1,6 +1,7 @@
 // Variables
 let expenseArray = [];
 let expenseID = 0;
+let userAuthenticated = false;
 
 // DOM Elements
 const LOGIN_BUTTON = document.querySelector('.loginBtn');
@@ -16,24 +17,55 @@ function displayGreeting(username) {
 }
 
 // Ask User to Register
-function displayRegisterMessage() {
-  document.querySelector('.greeting').innerHTML = 'Please Register First';
+function displayRegisterMessage(message) {
+  document.querySelector('.greeting').innerHTML = message;
+}
+
+// if userAuthenticated false, hide app
+function hideApplication() {
+  const REGISTER_BUTTON = document.querySelector('.registerBtn');
+  SIGN_IN_FORM.style.display = 'block';
+  LOGIN_BUTTON.style.display = 'block';
+  REGISTER_BUTTON.style.display = 'none';
+  MAIN_APP.style.display = 'none';
+  displayRegisterMessage('Please Login First');
+}
+
+// if userAuthentication true, show app
+function showApplication() {
+  const USERNAME_STORED = localStorage.getItem('username');
+  displayGreeting(USERNAME_STORED);
+  SIGN_IN_FORM.style.display = 'none';
+  MAIN_APP.style.display = 'block';
+}
+
+// Checks Authentication
+function isAuthenticated() {
+  if (userAuthenticated) {
+    showApplication();
+  } else {
+    hideApplication();
+  }
 }
 
 // Sign Out
 function signOut() {
-  window.location.reload();
+  userAuthenticated = false;
+  isAuthenticated();
 }
 
 /* REGISTER FUNCTION
  * Save username and password to local storage
 */
-function registerUser() {
+function registerUser(e) {
+  e.preventDefault();
   const USERNAME = document.querySelector('input[id="username"]').value;
   const PASSWORD = document.querySelector('input[id="password"]').value;
   localStorage.setItem('username', USERNAME);
   localStorage.setItem('password', PASSWORD);
   alert('You have successfully registered!');
+  userAuthenticated = true;
+  showApplication();
 }
 
 /* CHECK IF REGISTERED USER
@@ -56,7 +88,7 @@ function isRegistered(e) {
     MAIN_APP.style.display = 'block';
   } else {
     alert('You must register first!');
-    displayRegisterMessage();
+    displayRegisterMessage('Please register below');
     SIGN_IN_FORM.style.display = 'block';
     LOGIN_BUTTON.style.display = 'none';
     MAIN_APP.style.display = 'none';
