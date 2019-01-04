@@ -101,11 +101,17 @@ function calculateExpenseTotal() {
   calculateBalance(MONTHLY_TOTAL);
 }
 
+// Remove all matching elements from DOM
+function clearExpenses() {
+  document.querySelectorAll('.expenseContainer').forEach(expense => expense.parentNode.removeChild(expense));
+}
+
 // Retrieve expense data
 function getExpenses() {
   const EXPENSES = JSON.parse(localStorage.getItem('expenses'));
   if (EXPENSES) {
     expenseArray = EXPENSES;
+    clearExpenses();
     displayExpense();
     calculateExpenseTotal();
   }
@@ -184,11 +190,6 @@ function calculateXPSubtotal(type) {
   updateXPSubtotal(XP_SUBTOTAL, type);
 }
 
-// Remove all matching elements from DOM
-function clearExpenses() {
-  document.querySelectorAll('.expenseContainer').forEach(expense => expense.parentNode.removeChild(expense));
-}
-
 // Edit Expense Function
 function editExpense(e) {
   const CLICKED_XP = Number(e.target.parentElement.id);
@@ -230,6 +231,7 @@ function handleDeleteButton(e) {
 
 // CREATE NEW EXPENSE
 function newExpense() {
+  expenseID = expenseArray.length;
   expenseID += 1;
   const EXPENSE_TYPE = document.querySelector('select[id="selectExpenseType"]').value;
   const EXPENSE_NAME = document.querySelector('input[name="expenseName"]').value;
