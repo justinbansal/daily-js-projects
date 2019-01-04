@@ -21,6 +21,6 @@
 
 ### Budget App
 
-* Simple form for logging in 
-* Create budget
-* View budgets 
+* Authentication
+* Add / Edit / Delete Expenses by Category
+* Expense Subtotals & Totals
