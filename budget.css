@@ -1,3 +1,7 @@
+:root {
+    --expenseBackground: #FFFFFF;
+}
+
 .budget-app {
     display: none;
 }
@@ -8,6 +12,7 @@
     border: 1px solid black;
     margin: 10px auto;
     position: relative;
+    background: var(--expenseBackground);
 }
 
 .subtotalContainer {
