@@ -132,8 +132,9 @@ function clearExpenses() {
 function editExpense(e) {
   const CLICKED_XP = Number(e.target.parentElement.id);
   const FILTERED_ARRAY = expenseArray.filter(expense => expense.id === CLICKED_XP);
+  const EXPENSE_TYPE = FILTERED_ARRAY[0].type;
   const NEW_NAME = prompt('Enter new expense name');
-  const NEW_AMOUNT = prompt('Enter new expense amount');
+  const NEW_AMOUNT = Number(prompt('Enter new expense amount'));
   if (NEW_NAME) {
     FILTERED_ARRAY[0].name = NEW_NAME;
   }
@@ -142,6 +143,8 @@ function editExpense(e) {
   }
   clearExpenses();
   displayExpense();
+  calculateXPSubtotal(EXPENSE_TYPE);
+  calculateExpenseTotal();
 }
 
 /* Delete Expense Function
