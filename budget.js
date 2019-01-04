@@ -290,3 +290,12 @@ SIGN_OUT_BUTTON.addEventListener('click', signOut);
 ADD_EXPENSE_BUTTON.addEventListener('click', newExpense);
 ADD_INCOME_BUTTON.addEventListener('click', addIncome);
 REGISTER_BUTTON.addEventListener('click', registerUser);
+
+// CSS Variable Manipulation
+const INPUTS = document.querySelectorAll('.budget-app__customizations input');
+
+function handleUpdate() {
+  document.documentElement.style.setProperty(`--${this.name}`, this.value);
+}
+
+INPUTS.forEach(input => input.addEventListener('change', handleUpdate));
