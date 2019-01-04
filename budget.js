@@ -8,6 +8,7 @@ let userAuthenticated = false;
 const LOGIN_BUTTON = document.querySelector('.loginBtn');
 const SIGN_IN_FORM = document.querySelector('.sign-in');
 const SIGN_OUT_BUTTON = document.querySelector('.signOutBtn');
+const REGISTER_BUTTON = document.querySelector('.registerBtn');
 const MAIN_APP = document.querySelector('.budget-app');
 const ADD_INCOME_BUTTON = document.querySelector('.addIncomeBtn');
 const ADD_EXPENSE_BUTTON = document.querySelector('.addExpenseBtn');
@@ -25,10 +26,9 @@ function displayRegisterMessage(message) {
 
 // if userAuthenticated false, hide app
 function hideApplication() {
-  const REGISTER_BUTTON = document.querySelector('.registerBtn');
   SIGN_IN_FORM.style.display = 'block';
-  LOGIN_BUTTON.style.display = 'block';
-  REGISTER_BUTTON.style.display = 'none';
+  LOGIN_BUTTON.style.display = 'inline-block';
+  REGISTER_BUTTON.style.display = 'inline-block';
   MAIN_APP.style.display = 'none';
   displayRegisterMessage('Please Login First');
 }
@@ -141,18 +141,32 @@ function signOut() {
   localStorage.setItem('income', incomeAmount);
 }
 
+// Switch to registration menu
+function showRegistration() {
+  displayRegisterMessage('Please register below');
+  SIGN_IN_FORM.style.display = 'block';
+  LOGIN_BUTTON.style.display = 'none';
+  MAIN_APP.style.display = 'none';
+  REGISTER_BUTTON.style.display = 'block';
+}
+
+
 /* REGISTER FUNCTION
  * Save username and password to local storage
 */
 function registerUser(e) {
   e.preventDefault();
+  showRegistration();
   const USERNAME = document.querySelector('input[id="username"]').value;
   const PASSWORD = document.querySelector('input[id="password"]').value;
-  localStorage.setItem('username', USERNAME);
-  localStorage.setItem('password', PASSWORD);
-  alert('You have successfully registered!');
-  userAuthenticated = true;
-  showApplication();
+  if (USERNAME && PASSWORD) {
+    localStorage.setItem('username', USERNAME);
+    localStorage.setItem('password', PASSWORD);
+    userAuthenticated = true;
+    showApplication();
+  } else {
+    console.log('Please enter both fields');
+  }
 }
 
 /* CHECK IF REGISTERED USER
@@ -168,7 +182,6 @@ function isRegistered(e) {
   const PASSWORD_PROVIDED = document.querySelector('input[id="password"]').value;
   const USERNAME_STORED = localStorage.getItem('username');
   const PASSWORD_STORED = localStorage.getItem('password');
-  const REGISTER_BUTTON = document.querySelector('.registerBtn');
   if ((USERNAME_PROVIDED === USERNAME_STORED) && (PASSWORD_PROVIDED === PASSWORD_STORED)) {
     displayGreeting(USERNAME_STORED);
     SIGN_IN_FORM.style.display = 'none';
@@ -177,12 +190,7 @@ function isRegistered(e) {
     getIncome();
   } else {
     alert('You must register first!');
-    displayRegisterMessage('Please register below');
-    SIGN_IN_FORM.style.display = 'block';
-    LOGIN_BUTTON.style.display = 'none';
-    MAIN_APP.style.display = 'none';
-    REGISTER_BUTTON.style.display = 'block';
-    REGISTER_BUTTON.addEventListener('click', registerUser);
+    showRegistration();
   }
 }
 
@@ -268,3 +276,4 @@ LOGIN_BUTTON.addEventListener('click', isRegistered);
 SIGN_OUT_BUTTON.addEventListener('click', signOut);
 ADD_EXPENSE_BUTTON.addEventListener('click', newExpense);
 ADD_INCOME_BUTTON.addEventListener('click', addIncome);
+REGISTER_BUTTON.addEventListener('click', registerUser);
