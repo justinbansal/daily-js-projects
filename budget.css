@@ -20,6 +20,12 @@
 
 .deleteBtn {
     position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.editBtn {
+    position: absolute;
     top: 0;
     right: 0;
 }
