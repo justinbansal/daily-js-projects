@@ -2,7 +2,7 @@
 let incomeAmount;
 let expenseArray = [];
 let expenseID = 0;
-let userAuthenticated = false;
+let userAuthenticated = JSON.parse(localStorage.getItem('userAuthenticated'));
 
 // DOM Elements
 const LOGIN_BUTTON = document.querySelector('.loginBtn');
@@ -135,6 +135,7 @@ function getExpenses() {
 
 // Checks Authentication
 function isAuthenticated() {
+  userAuthenticated = JSON.parse(localStorage.getItem('userAuthenticated'));
   if (userAuthenticated) {
     showApplication();
     getExpenses();
@@ -146,7 +147,7 @@ function isAuthenticated() {
 
 // Sign Out
 function signOut() {
-  userAuthenticated = false;
+  localStorage.setItem('userAuthenticated', JSON.stringify(false));
   isAuthenticated();
   localStorage.setItem('expenses', JSON.stringify(expenseArray));
   localStorage.setItem('income', incomeAmount);
@@ -173,7 +174,7 @@ function registerUser(e) {
   if (USERNAME && PASSWORD) {
     localStorage.setItem('username', USERNAME);
     localStorage.setItem('password', PASSWORD);
-    userAuthenticated = true;
+    localStorage.setItem('userAuthenticated', JSON.stringify(true));
     showApplication();
   } else {
     console.log('Please enter both fields');
@@ -194,11 +195,8 @@ function isRegistered(e) {
   const USERNAME_STORED = localStorage.getItem('username');
   const PASSWORD_STORED = localStorage.getItem('password');
   if ((USERNAME_PROVIDED === USERNAME_STORED) && (PASSWORD_PROVIDED === PASSWORD_STORED)) {
-    displayGreeting(USERNAME_STORED);
-    SIGN_IN_FORM.style.display = 'none';
-    MAIN_APP.style.display = 'block';
-    getExpenses();
-    getIncome();
+    localStorage.setItem('userAuthenticated', JSON.stringify(true));
+    isAuthenticated();
   } else {
     alert('You must register first!');
     showRegistration();
@@ -290,6 +288,9 @@ SIGN_OUT_BUTTON.addEventListener('click', signOut);
 ADD_EXPENSE_BUTTON.addEventListener('click', newExpense);
 ADD_INCOME_BUTTON.addEventListener('click', addIncome);
 REGISTER_BUTTON.addEventListener('click', registerUser);
+
+// To keep user logged in
+isAuthenticated();
 
 // CSS Variable Manipulation
 const INPUTS = document.querySelectorAll('.budget-app__customizations input');
