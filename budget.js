@@ -287,10 +287,6 @@ function newExpense() {
     const expenseID = state.expenseArray.length + 1
     const EXPENSE_TYPE = document.querySelector('select[id="selectExpenseType"]').value
     const EXPENSE_NAME = document.querySelector('input[name="expenseName"]').value
-
-    // ***NOTE***: Do you need to do any conversions to handle different styles of inputting a number?
-    // Alternatively, is there a way that you could force the formatting of a number and display that to the user?
-    // Think about the difference between one thousand, 1,000, 1000, and 1000.00
     const EXPENSE_AMOUNT = Number(document.querySelector('input[name="expenseAmount"]').value)
 
     const EXPENSE = {
