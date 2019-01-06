@@ -1,25 +1,32 @@
 {
-  "name": "daily-js-projects",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/justinbansal/daily-js-projects.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/justinbansal/daily-js-projects/issues"
-  },
-  "homepage": "https://github.com/justinbansal/daily-js-projects#readme",
-  "dependencies": {},
-  "devDependencies": {
-    "eslint": "^5.7.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0"
-  }
+    "name": "daily-js-projects",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "babel src/ -d lib/ --copy-files",
+        "prepublish": "npm run build",
+        "flow": "flow"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/justinbansal/daily-js-projects.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/justinbansal/daily-js-projects/issues"
+    },
+    "homepage": "https://github.com/justinbansal/daily-js-projects#readme",
+    "dependencies": {},
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-flow": "^6.23.0",
+        "babel-preset-minify": "^0.5.0",
+        "eslint": "^5.7.0",
+        "eslint-config-airbnb-base": "^13.1.0",
+        "eslint-plugin-import": "^2.14.0",
+        "flow-bin": "^0.89.0"
+    }
 }

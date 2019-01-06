@@ -1,0 +1,34 @@
+:root {
+    --expenseBackground: #FFFFFF;
+    --expenseFontColor: #333333;
+}
+
+.budget-app {
+    display: none;
+}
+
+.expenseContainer {
+    padding: 20px;
+    text-align: center;
+    border: 1px solid black;
+    margin: 10px auto;
+    position: relative;
+    background: var(--expenseBackground);
+    color: var(--expenseFontColor);
+}
+
+.subtotalContainer {
+    margin-left: 50px;
+}
+
+.deleteBtn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.editBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}

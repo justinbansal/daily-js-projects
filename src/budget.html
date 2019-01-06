@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Budget App</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="budget.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Personal Budget</h1>
+                <h3 class="greeting">Please Login Below</h3>
+                <div class="sign-in">
+                    <form>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" placeholder="Enter username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password">
+                        </div>
+                        <button class="btn btn-primary loginBtn">Login</button>
+                        <button class="btn btn-primary registerBtn">Register</button>
+                    </form>
+                </div>
+                <div class="budget-app">
+                    <hr>
+                    <button class="btn btn-warning signOutBtn">Sign Out</button>
+                    <h4>Monthly income: <span class="monthlyIncome"></span></h4>
+                    <h4>Monthly expense total: <span class="monthlyTotal"></span></h4>
+                    <h4>Balance: <span class="balance"></span></h4>
+                    <hr>
+                    <h4>Add monthly income</h4>
+                    <div class="form-group">
+                        <label for="income">Amount:</label>
+                        <input type="text" name="income" class="form-control" placeholder="Enter monthly income">
+                    </div>
+                    <button class="btn btn-primary addIncomeBtn">Update Income</button>
+                    <hr>
+                    <h4>Add a new expense</h4>
+                    <div class="form-group">
+                        <label for="selectExpenseType">Select Type:</label>
+                        <select class="form-control" id="selectExpenseType">
+                            <option>Home</option>
+                            <option>Personal</option>
+                            <option>Transportation</option>
+                            <option>Entertainment</option>
+                            <option>Misc</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseName">Name:</label>
+                        <input type="text" name="expenseName" class="form-control" placeholder="Enter name">
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseAmount">Amount:</label>
+                        <input type="number" name="expenseAmount" class="form-control" placeholder="Enter amount">
+                    </div>
+                    <button class="btn btn-primary addExpenseBtn">Add New Expense</button>
+                    <div class="budget-app__display-expenses">
+                        <h5 class="home">Home</h5>
+                        <div class="subtotalContainer">
+                            Subtotal: <span class="home__subtotal"></span>
+                        </div>
+                        <h5 class="personal">Personal</h5>
+                        <div class="subtotalContainer">
+                            Subtotal: <span class="personal__subtotal"></span>
+                        </div>
+                        <h5 class="transportation">Transportation</h5>
+                        <div class="subtotalContainer">
+                            Subtotal: <span class="transportation__subtotal"></span>
+                        </div>
+                        <h5 class="entertainment">Entertainment</h5>
+                        <div class="subtotalContainer">
+                            Subtotal: <span class="entertainment__subtotal"></span>
+                        </div>
+                        <h5 class="misc">Misc</h5>
+                        <div class="subtotalContainer">
+                            Subtotal: <span class="misc__subtotal"></span>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="budget-app__customizations">
+                        <h4>Customize Budget</h4>
+                        <div class="form-group">
+                            <label for="expenseBackground">Expense Background</label>
+                            <input type="color" name="expenseBackground" value="#ffffff">
+                        </div>
+                        <div class="form-group">
+                            <label for="expenseFontColor">Expense Font Color</label>
+                            <input type="color" name="expenseFontColor" value="#333333">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script src="budget.js"></script>
+</html>
