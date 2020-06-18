@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concentration</title>
+</head>
+<body>
+
+  <div class="game-board">
+    <h2>You matched <span class="matches"></span> time(s).</h2>
+    <h2>You missed <span class="misses"></span> time(s).</h2>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+<style>
+
+  .game-board {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+  }
+
+  .square {
+    float: left;
+    width: 300px;
+    height: 300px;
+  }
+
+  .disabled {
+    pointer-events: none;
+  }
+
+  .clicked {
+    opacity: 0.4;
+    transition: opacity 2s;
+  }
+
+  .item-is-hidden {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+</style>
+</html>
